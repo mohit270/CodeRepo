@@ -2,13 +2,13 @@
 #include<set>
 #include <vector>
 using namespace std;
-vector<vector<int> > threeSumBrute(vector<int>&a){
+vector<vector<int> > threeSumBrute(vector<int>&a , int target){
     set<vector<int> >st;
     int n = a.size();
     for(int i=0;i<n;i++){
         for(int j=i+1;j<n;j++){
             for(int k=j+1;k<n;k++){
-                if(a[i]+a[j]+a[k] == 0){
+                if(a[i]+a[j]+a[k] == target){
                     vector<int> temp ;
                     temp.push_back(a[i]);
                     temp.push_back(a[j]);
@@ -21,13 +21,13 @@ vector<vector<int> > threeSumBrute(vector<int>&a){
     }vector<vector<int> >ans(st.begin(),st.end());
     return ans;
 }
-vector<vector<int> > threeSumBetter(vector<int>&a){
+vector<vector<int> > threeSumBetter(vector<int>&a , int target){
     set<vector<int> >st;
     int n = a.size();
     for(int i=0;i<n;i++){
         set<int>ss;
         for(int j=i+1;j<n;j++){
-            int third = -(a[i]+a[j]);
+            int third = target -(a[i]+a[j]);
             if(ss.find(third)!=ss.end()){
                 vector<int> temp;
                 temp.push_back(a[i]);
@@ -40,7 +40,7 @@ vector<vector<int> > threeSumBetter(vector<int>&a){
     }vector<vector<int> >ans(st.begin(),st.end());
     return ans;
 }
-vector<vector<int> > threeSumOptimal(vector<int>&a){
+vector<vector<int> > threeSumOptimal(vector<int>&a,int target){
     int n = a.size();
     vector<vector<int> >ans;
     sort(a.begin(),a.end());
@@ -50,8 +50,8 @@ vector<vector<int> > threeSumOptimal(vector<int>&a){
         int k = n-1;
         while(j<k){
             int sum = a[i]+a[j]+a[k];
-            if(sum > 0) k--;
-            else if(sum < 0) j++;
+            if(sum > target) k--;
+            else if(sum < target) j++;
             else{
                 vector<int>temp;
                 temp.push_back(a[i]);
@@ -71,11 +71,12 @@ vector<vector<int> > threeSumOptimal(vector<int>&a){
 int main(){
     int n;cin>>n;
     vector<int> a(n);
+    int target;cin>>target;
     for(int i=0;i<n;i++){
         cin>>a[i];
     }
     cout<<"Three sum Brute force Approach \n";
-    vector<vector<int> > bruteResult = threeSumBrute(a);
+    vector<vector<int> > bruteResult = threeSumBrute(a,target);
     for (const auto& triplet : bruteResult) {
         for (const int& num : triplet) {
             cout << num << " ";
@@ -83,7 +84,7 @@ int main(){
         cout << "\n";
     }
     cout<<"Three sum better Approach \n";
-    vector<vector<int> > betterResult = threeSumBetter(a);
+    vector<vector<int> > betterResult = threeSumBetter(a,target);
     for (const auto& triplet : betterResult) {
         for (const int& num : triplet) {
             cout << num << " ";
@@ -91,7 +92,7 @@ int main(){
         cout << "\n";
     }
     cout<<"Three sum optimal Approach \n";
-    vector<vector<int> > optimalResult = threeSumOptimal(a);
+    vector<vector<int> > optimalResult = threeSumOptimal(a,target);
     for (const auto& triplet : optimalResult) {
         for (const int& num : triplet) {
             cout << num << " ";

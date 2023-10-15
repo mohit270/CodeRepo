@@ -87,22 +87,23 @@ vector<vector<int> > fourSumOptimal(vector<int>&a ,int target){
 int main(){
     int n;cin>>n;
     vector<int>a(n);
+    int target ;cin>>target;
     for(int i=0;i<n;i++) cin>>a[i];
-    vector<vector<int> > ans = fourSumBrute(a , 5);
+    vector<vector<int> > ans = fourSumBrute(a , target);
     if(ans.size() == 0) cout<<"[-1,-1]"<<endl;  
     for(auto it:ans){
         for(auto kt:it){
             cout<<kt<<" ";
         }cout<<endl;
     }
-    vector<vector<int> > ans1 = fourSumBetter(a , 5);
+    vector<vector<int> > ans1 = fourSumBetter(a , target);
     if(ans1.size() == 0) cout<<"[-1,-1]"<<endl;  
     for(auto it:ans1){
         for(auto kt:it){
             cout<<kt<<" ";
         }cout<<endl;
     }
-    vector<vector<int> > ans2 = fourSumOptimal(a , 5);
+    vector<vector<int> > ans2 = fourSumOptimal(a , target);
     if(ans2.size() == 0) cout<<"[-1,-1]"<<endl;  
     for(auto it:ans2){
         for(auto kt:it){
